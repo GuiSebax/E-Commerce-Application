@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---- Enums ----
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// ---- Model ----
+// Usuário
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  role      UserRole @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações
+  orders    Order[]
+  addresses Address[]
+}
+
+// Endereço
+model Address {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  street    String
+  city      String
+  state     String
+  country   String
+  zipCode   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações
+  user User @relation(fields: [userId], references: [id])
+}
+
+// Produto
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relações
+  images     ProductImage[] //Váris imagens do produto
+  categories Category[]     @relation("ProductsOnCategories") // many-to-many
+  orderItems OrderItem[]
+}
+
+// Imagem do produto
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  imageUrl  String
+  createdAt DateTime @default(now())
+
+  // Relações
+  product Product @relation(fields: [productId], references: [id])
+}
+
+// Categoria
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relações
+  products Product[] @relation("ProductsOnCategories")
+}
+
+// Pedido
+model Order {
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  totalPrice Float
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  // Relações
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+}
+
+// Item do pedido
+model OrderItem {
+  id              Int   @id @default(autoincrement())
+  orderId         Int
+  productId       Int
+  quantity        Int   @default(1)
+  priceAtPurchase Float
+
+  // Relações
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+}
+
+/**
+ * User -> Address: 1:N (um usuário pode ter vários endereços).
+ * User -> Order: 1:N (um usuário pode ter vários pedidos).
+ * Product -> Category: N:M (um produto pode estar em várias categorias e cada categoria pode ter vários produtos).
+ * Product -> ProductImage: 1:N (um produto pode ter várias imagens).
+ * Order -> OrderItem: 1:N (um pedido pode ter vários itens).
+ * OrderItem -> Product: N:1 (muitos itens podem apontar para um mesmo produto).
+ */
