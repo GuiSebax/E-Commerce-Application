@@ -106,19 +106,19 @@ ecommerce-backend/
 
 6 - Rodar o em modo de desenvolvimento
 
-No package.json em **scripts**, adicione:
+  No package.json em **scripts**, adicione:
 
-{
+  {  
 
-  "scripts": {
+    "scripts": {
   
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
     
-  }
+    }
   
-}
+  }
 
 7 - Iniciar o servidor com **npm run dev**.
 
