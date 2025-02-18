@@ -24,7 +24,6 @@ Vamos para os passos para a inicialização do backend
 
 ```
 $ npm init -y
-
 ```
 
 2 - Instalar as depêndencias
@@ -32,7 +31,6 @@ $ npm init -y
 $ npm install express cors pg jsonwebtoken bcryptjs
 
 $ npm install --save-dev typescript ts-node @types/express @types/nodemon @types/cors @types/jsonwebtoken @types/bcryptjs
-
 ```
 
 3 - Configurar o Typescript (tsconfig.json)
@@ -42,6 +40,7 @@ Vamos criar o arquivo **tsconfig.json** na raiz do projeto, você pode ver o con
 4 - Estrutura das Pastas
 
 ecommerce-backend/
+
 ├─ .env                 // Variáveis de ambiente (DATABASE_URL, etc.)
 
 ├─ .gitignore           // Ignora node_modules, dist, .env, etc.
@@ -116,7 +115,9 @@ No package.json em **scripts**, adicione:
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
+    
   }
+  
 }
 
 7 - Iniciar o servidor com **npm run dev**.
@@ -129,7 +130,6 @@ No package.json em **scripts**, adicione:
 $ npm install prisma @prisma/client
 
 $ npx prisma init
-
 ```
 
 Isso cria um arquivo **.env** e a pasta **prisma/**
