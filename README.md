@@ -43,33 +43,61 @@ Vamos criar o arquivo **tsconfig.json** na raiz do projeto, você pode ver o con
 
 ecommerce-backend/
 ├─ .env                 // Variáveis de ambiente (DATABASE_URL, etc.)
+
 ├─ .gitignore           // Ignora node_modules, dist, .env, etc.
+
 ├─ package.json         // Dependências e scripts
+
 ├─ tsconfig.json        // Configurações do TypeScript
+
 ├─ prisma/
+
 │  ├─ schema.prisma     // Definição dos modelos do banco via Prisma
+
 │  └─ migrations/       // Migrations geradas automaticamente pelo Prisma
+
 ├─ src/
+
 │  ├─ controllers/
+
 │  │  ├─ product.controller.ts
+
 │  │  ├─ user.controller.ts
+
 │  │  └─ order.controller.ts
+
 │  ├─ db/
+
 │  │  └─ prisma.ts      // Instância do PrismaClient, conexão com Postgres
+
 │  ├─ routes/
+
 │  │  ├─ product.routes.ts
+
 │  │  ├─ user.routes.ts
+
 │  │  └─ order.routes.ts
+
 │  ├─ services/
+
 │  │  ├─ product.service.ts
+
 │  │  ├─ user.service.ts
+
 │  │  └─ order.service.ts
+
 │  ├─ middlewares/
+
 │  │  └─ auth.middleware.ts  // Exemplos de middleware de autenticação
+
 │  ├─ utils/
+
 │  │  └─ helpers.ts     // Funções utilitárias ou de formatação
+
 │  ├─ index.ts          // Configuração principal do app (Express, middlewares)
+
 │  └─ server.ts         // Ponto de entrada para subir o servidor
+
 └─ ...
 
 
@@ -82,7 +110,9 @@ ecommerce-backend/
 No package.json em **scripts**, adicione:
 
 {
+
   "scripts": {
+  
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
