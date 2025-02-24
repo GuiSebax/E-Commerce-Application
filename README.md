@@ -151,3 +151,53 @@ $ npx prisma generate
 5 - Crie um arquivo src/db/prisma.ts para inicializar o prisma para poder usar nos arquivos services.
 
 ## Frontend
+
+Estrutura fica assim 
+
+/ecommerce-frontend        # 📂 Diretório raiz do projeto
+│── public/                 # 📂 Arquivos estáticos (favicon, imagens, etc.)
+│── src/                    # 📂 Código fonte do projeto
+│   ├── app/                # 📂 Rotas e páginas do Next.js (App Router)
+│   │   ├── layout.tsx      # 📄 Layout global (Navbar/Footer)
+│   │   ├── page.tsx        # 📄 Página inicial (Home)
+│   │   ├── login/page.tsx  # 📄 Página de login
+│   │   ├── register/page.tsx # 📄 Página de cadastro
+│   │   ├── products/       # 📂 Páginas de produtos
+│   │   │   ├── page.tsx    # 📄 Página de listagem de produtos (/products)
+│   │   │   ├── [id]/       # 📂 Página dinâmica de detalhes do produto
+│   │   │   │   ├── page.tsx # 📄 Página de detalhes (/products/:id)
+│   │   ├── cart/page.tsx   # 📄 Página do carrinho (/cart)
+│   │   ├── orders/         # 📂 Páginas de pedidos
+│   │   │   ├── page.tsx    # 📄 Página de listagem de pedidos (/orders)
+│   │   │   ├── [id]/       # 📂 Página dinâmica de detalhes do pedido
+│   │   │   │   ├── page.tsx # 📄 Página de detalhes (/orders/:id)
+│   │   ├── address/page.tsx # 📄 Página de endereços (/address)
+│   │   ├── dashboard/      # 📂 Área administrativa
+│   │   │   ├── page.tsx    # 📄 Dashboard do admin (/dashboard)
+│   │   │   ├── products/page.tsx # 📄 Gerenciamento de produtos (/dashboard/products)
+│   │   │   ├── users/page.tsx    # 📄 Gerenciamento de usuários (/dashboard/users)
+│   │   │   ├── orders/page.tsx   # 📄 Gerenciamento de pedidos (/dashboard/orders)
+│   │   ├── api/           # 📂 Rotas da API interna do Next.js
+│   │   │   ├── auth/route.ts  # 📄 Rota de login/register
+│   │   │   ├── products/route.ts # 📄 Rota de produtos
+│   │   │   ├── orders/route.ts # 📄 Rota de pedidos
+│   │   │   ├── users/route.ts # 📄 Rota de usuários
+│   ├── components/    # 📂 Componentes reutilizáveis
+│   │   ├── ui/        # 📂 Componentes de UI (Botões, Inputs, Cards)
+│   │   ├── layout/    # 📂 Componentes de Layout (Navbar, Sidebar, Footer)
+│   │   ├── product/   # 📂 Componentes específicos de produtos
+│   │   ├── cart/      # 📂 Componentes específicos do carrinho
+│   ├── contexts/      # 📂 Context API (AuthContext, CartContext)
+│   ├── hooks/         # 📂 Hooks personalizados (useAuth, useCart)
+│   ├── services/      # 📂 Comunicação com a API (fetch de produtos, usuários)
+│   ├── middleware/    # 📂 Middlewares para proteger rotas
+│   ├── store/         # 📂 Estado global (Redux Toolkit/Zustand, se necessário)
+│   ├── utils/         # 📂 Funções auxiliares (formatar preço, datas)
+│   ├── styles/        # 📂 Estilos globais (Tailwind CSS)
+│   ├── assets/        # 📂 Ícones, imagens e fontes
+│── .env.local         # 📄 Variáveis de ambiente (API_URL, JWT_SECRET)
+│── tailwind.config.js # 📄 Configuração do Tailwind CSS
+│── next.config.js     # 📄 Configuração do Next.js
+│── package.json       # 📄 Dependências do projeto
+│── tsconfig.json      # 📄 Configuração do TypeScript
+│── README.md          # 📄 Documentação do projeto

@@ -5,6 +5,8 @@ import addressRoutes from './routes/AddressRoutes'
 import categoryRoutes from './routes/CategoryRoutes';
 import userRoutes from './routes/UserRoutes';
 import authRoutes from './routes/AuthRoutes';
+
+
 const PORT = process.env.PORT || 3000;
 
 // Endpoints
